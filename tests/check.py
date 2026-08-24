@@ -44,7 +44,7 @@ def check_demo(zola: Path) -> None:
         'aria-controls="mobile-navigation-dialog"',
         'class="sidebar-chevron is-expanded"',
         'class="sidebar-child-count"',
-        '<span aria-hidden="true">1</span><span class="visually-hidden">1 sub-pages</span>',
+        'class="sidebar-child-count">1<span class="visually-hidden"> sub-pages</span>',
         'id="main-content"',
         'style="max-width: 78rem"',
     )
