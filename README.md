@@ -52,10 +52,13 @@ Override values under `[extra.zola_docs]`:
 | `page_navigation` | `true` | Show previous and next page links when page data provides them |
 | `breadcrumbs` | `true` | Show page breadcrumbs when page data provides them |
 | `toc` | `true` | Show page tables of contents |
+| `content_max_width` | `78rem` | CSS maximum width for page and section content; use `none` for full width |
+| `backlinks` | `false` | Show pages and sections that link to the current content |
+| `backlinks_label` | `Referenced by` | Backlink list heading |
 | `edit_url` | empty | Repository edit URL prefix |
 | `edit_branch` | `main` | Source branch or tag used by edit links |
 | `last_updated` | `true` | Show `page.updated` when available |
-| `appearance_selector` | `true` | Show a persisted auto/light/dark control |
+| `appearance_selector` | `true` | Show a system-aware, persisted light/dark toggle |
 | `metadata` | `true` | Emit canonical and Open Graph page metadata |
 | `social_image` | empty | Optional default Open Graph image |
 | `mermaid` | `false` | Load Mermaid on pages containing diagrams |
@@ -85,6 +88,7 @@ previous = { title = "Overview", path = "" }
 next = { title = "Configuration", path = "guides/configuration/" }
 page_navigation = true
 toc = true
+backlinks = false
 edit_link = true
 metadata = true
 ```
@@ -93,6 +97,11 @@ Internal navigation entries use paths without a leading slash. The theme resolve
 Zola's `get_url`, so the same build works at the domain root and under a base path. A consumer can
 set any per-page boolean to `false`, and `page_navigation`, `breadcrumbs`, and `toc` also have global
 defaults.
+
+Backlinks use Zola's native `page.backlinks` and `section.backlinks` data. The theme does not parse
+wikilinks or require them: ordinary internal links and wikilinks both contribute when the Zola build
+records an internal content link. Enable backlink presentation with `backlinks = true` globally or
+on individual content through `[extra]`.
 
 Set `[markdown] insert_anchor_links = "right"` in the site configuration to use the theme's
 keyboard-focusable heading permalinks.

@@ -38,9 +38,12 @@ def check_demo(zola: Path) -> None:
         'aria-current="page">Stable',
         '>Nightly</a>',
         'data-appearance-toggle',
+        'class="theme-icon theme-icon-light"',
+        'class="theme-icon theme-icon-dark"',
         'data-navigation-open',
         'aria-controls="mobile-navigation-dialog"',
         'id="main-content"',
+        '--docs-content-max-width: 78rem',
     )
     require(
         guide,
@@ -51,12 +54,24 @@ def check_demo(zola: Path) -> None:
         'aria-label="Page navigation"',
         'class="edit-link"',
         'class="last-updated"',
+        'class="backlinks"',
+        "Referenced by",
+        ">Zola Docs</a>",
         'class="heading-anchor"',
         'rel="canonical"',
     )
     require(css, "prefers-color-scheme: dark", "@media (max-width: 52rem)", ":focus-visible", ".navigation-dialog", "100dvh")
     script = (ROOT / "static/zola-docs.js").read_text()
-    require(script, 'document.createElement("dialog")', "showModal()", 'aria-current="page"', "scrollIntoView")
+    require(
+        script,
+        'document.querySelector("[data-appearance-toggle]")',
+        'appearance.setAttribute("aria-label", appearanceLabel + ": switch to " + action + " theme")',
+        'appearance.addEventListener("click"',
+        'document.createElement("dialog")',
+        "showModal()",
+        'aria-current="page"',
+        "scrollIntoView",
+    )
     if not all(item.get("title") for item in search):
         raise RuntimeError("Demo search index contains an empty title")
     for directory in (ROOT / "templates", ROOT / "static"):
@@ -89,14 +104,18 @@ include_path = true
 [extra.zola_docs]
 site_name = "Consumer"
 version_banner = "Preview documentation"
+backlinks = true
+content_max_width = "none"
 '''
         )
         (site / "data/navigation.json").write_text(
             '[{"title":"Consumer","items":[{"title":"Page","path":"page/"}]}]\n'
         )
-        (site / "content/_index.md").write_text("+++\ntitle = \"Home\"\n+++\n\n# Home\n")
+        (site / "content/_index.md").write_text(
+            "+++\ntitle = \"Home\"\n+++\n\n# Home\n\n[Page](@/page.md)\n"
+        )
         (site / "content/page.md").write_text(
-            "+++\ntitle = \"Consumer page\"\n[extra]\npage_navigation = false\n+++\n\n# Consumer page\n\n## Detail\n"
+            "+++\ntitle = \"Consumer page\"\n[extra]\npage_navigation = false\nbacklinks = false\n+++\n\n# Consumer page\n\n## Detail\n"
         )
         (site / "templates/page.html").write_text(
             '''{% extends "zola-docs/templates/page.html" %}
@@ -109,6 +128,7 @@ version_banner = "Preview documentation"
         require(
             page,
             "Consumer page",
+            '--docs-content-max-width: none',
             "data-consumer-metadata",
             "data-consumer-override",
             "Preview documentation",
@@ -121,6 +141,8 @@ version_banner = "Preview documentation"
             raise RuntimeError("Version switcher rendered when versioning was disabled")
         if 'aria-label="Page navigation"' in page:
             raise RuntimeError("Page navigation rendered when disabled for the page")
+        if 'class="backlinks"' in page:
+            raise RuntimeError("Backlinks rendered when disabled for the page")
 
 
 def main() -> None:
