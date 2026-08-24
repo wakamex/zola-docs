@@ -47,6 +47,7 @@ def check_demo(zola: Path) -> None:
     )
     require(
         guide,
+        '<details class="toc" open>',
         "On this page",
         'class="mermaid"',
         'type="module"',
@@ -69,6 +70,8 @@ def check_demo(zola: Path) -> None:
         'document.querySelector("[data-appearance-toggle]")',
         'appearance.setAttribute("aria-label", appearanceLabel + ": switch to " + action + " theme")',
         'appearance.addEventListener("click"',
+        'matchMedia("(max-width: 52rem)")',
+        "tableOfContents.open = !compactTableOfContents.matches",
         'document.createElement("dialog")',
         "showModal()",
         'aria-current="page"',
