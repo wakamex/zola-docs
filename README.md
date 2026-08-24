@@ -26,9 +26,16 @@ Provide `data/navigation.json` as an array of groups:
 ```json
 [
   {
+    "id": "guides",
     "title": "Guides",
     "items": [
-      { "title": "Getting started", "path": "guides/getting-started/" }
+      {
+        "title": "Getting started",
+        "path": "guides/getting-started/",
+        "children": [
+          { "title": "Installation", "path": "guides/installation/" }
+        ]
+      }
     ]
   }
 ]
@@ -98,6 +105,25 @@ Internal navigation entries use paths without a leading slash. The theme resolve
 Zola's `get_url`, so the same build works at the domain root and under a base path. A consumer can
 set any per-page boolean to `false`, and `page_navigation`, `breadcrumbs`, and `toc` also have global
 defaults.
+
+Set `navigation_group` and `navigation_branch` in page or section extras to use build-time scoped
+navigation:
+
+```toml
+[extra]
+navigation_group = "guides"
+navigation_branch = "guides/getting-started/"
+```
+
+The theme always emits the major group headings, emits items only for the current group, and emits
+children only for the current branch. Set `sidebar_children` to `false` on a navigation item when
+its exhaustive leaves already live on an index page and in search. Pages without these extras keep
+the complete navigation for compatibility.
+
+Zola resolves this scope while rendering each static page. Unrelated links never enter that page's
+HTML, so the browser has less markup to download and parse than a complete tree hidden with CSS or
+collapsed by JavaScript. The full navigation data remains available at build time for breadcrumbs,
+previous and next links, validation, and generated reference indexes.
 
 Backlinks use Zola's native `page.backlinks` and `section.backlinks` data. The theme does not parse
 wikilinks or require them: ordinary internal links and wikilinks both contribute when the Zola build

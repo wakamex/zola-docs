@@ -3,6 +3,8 @@ title = "Getting started"
 updated = 2026-08-24
 
 [extra]
+navigation_group = "theme"
+navigation_branch = "guides/getting-started/"
 breadcrumbs = [{ title = "Guides", path = "guides/" }]
 previous = { title = "Zola Docs", path = "" }
 +++

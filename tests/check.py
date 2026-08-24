@@ -114,13 +114,22 @@ content_max_width = "none"
 '''
         )
         (site / "data/navigation.json").write_text(
-            '[{"title":"Consumer","items":[{"title":"Page","path":"page/"}]}]\n'
+            '[{"id":"consumer","title":"Consumer","items":['
+            '{"title":"Page","path":"page/","children":['
+            '{"title":"Child","path":"child/"}]},'
+            '{"title":"Peer","path":"peer/"}]},'
+            '{"id":"reference","title":"Reference","path":"reference/","items":['
+            '{"title":"Hidden reference entry","path":"reference/entry/"}]}]\n'
         )
         (site / "content/_index.md").write_text(
             "+++\ntitle = \"Home\"\n+++\n\n# Home\n\n[Page](@/page.md)\n"
         )
         (site / "content/page.md").write_text(
             "+++\ntitle = \"Consumer page\"\n[extra]\npage_navigation = false\nbacklinks = false\n+++\n\n# Consumer page\n\n## Detail\n"
+            .replace(
+                "backlinks = false",
+                'backlinks = false\nnavigation_group = "consumer"\nnavigation_branch = "page/"',
+            )
         )
         (site / "templates/page.html").write_text(
             '''{% extends "zola-docs/templates/page.html" %}
@@ -139,6 +148,10 @@ content_max_width = "none"
             "Preview documentation",
             'href="https://docs.example.test/manual/page',
             'aria-current="page"',
+            'aria-current="page">Page',
+            ">Child</a>",
+            ">Peer</a>",
+            ">Reference</a>",
             'href="https://docs.example.test/manual/zola-docs.css?',
             "zola-docs.css",
         )
@@ -148,6 +161,8 @@ content_max_width = "none"
             raise RuntimeError("Page navigation rendered when disabled for the page")
         if 'class="backlinks"' in page:
             raise RuntimeError("Backlinks rendered when disabled for the page")
+        if "Hidden reference entry" in page:
+            raise RuntimeError("Scoped navigation rendered an unrelated group entry")
 
 
 def main() -> None:

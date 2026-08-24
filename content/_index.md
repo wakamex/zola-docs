@@ -1,5 +1,9 @@
 +++
 title = "Zola Docs"
+
+[extra]
+navigation_group = "theme"
+navigation_branch = "/"
 +++
 
 # Zola Docs
