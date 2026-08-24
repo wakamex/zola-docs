@@ -1,0 +1,12 @@
+[
+  {
+    "id": "stable",
+    "label": "Stable",
+    "path": ""
+  },
+  {
+    "id": "nightly",
+    "label": "Nightly",
+    "url": "https://example.com/nightly/"
+  }
+]

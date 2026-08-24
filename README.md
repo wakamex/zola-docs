@@ -1,0 +1,157 @@
+# Zola Docs
+
+Zola Docs is a small documentation theme with responsive navigation, breadcrumbs, previous and next
+page links, a page table of contents, local search, persisted auto/light/dark appearance, code-copy
+controls, optional Mermaid rendering, and optional documentation version selection. It has no
+framework or package-manager runtime dependency.
+
+## Install
+
+Install the repository as `themes/zola-docs` and enable it in `config.toml`:
+
+```toml
+theme = "zola-docs"
+build_search_index = true
+
+[search]
+index_format = "fuse_json"
+include_title = true
+include_content = true
+include_path = true
+```
+
+Provide `data/navigation.json` as an array of groups:
+
+```json
+[
+  {
+    "title": "Guides",
+    "items": [
+      { "title": "Getting started", "path": "guides/getting-started/" }
+    ]
+  }
+]
+```
+
+## Configuration
+
+Override values under `[extra.zola_docs]`:
+
+| Key | Default | Purpose |
+| --- | --- | --- |
+| `site_name` | `Documentation` | Header label |
+| `home_url` | `/` | Header destination |
+| `navigation_path` | `data/navigation.json` | Navigation data file |
+| `navigation_label` | `Documentation` | Navigation accessible label |
+| `search_enabled` | `true` | Load the local search interface |
+| `search_label` | `Search documentation` | Search accessible label |
+| `search_placeholder` | `Search` | Search input hint |
+| `search_index` | `search_index.en.json` | Fuse JSON index path |
+| `search_results_limit` | `10` | Maximum visible results |
+| `copy_code` | `true` | Add copy buttons to code blocks |
+| `page_navigation` | `true` | Show previous and next page links when page data provides them |
+| `breadcrumbs` | `true` | Show page breadcrumbs when page data provides them |
+| `toc` | `true` | Show page tables of contents |
+| `edit_url` | empty | Repository edit URL prefix |
+| `edit_branch` | `main` | Source branch or tag used by edit links |
+| `last_updated` | `true` | Show `page.updated` when available |
+| `appearance_selector` | `true` | Show a persisted auto/light/dark control |
+| `metadata` | `true` | Emit canonical and Open Graph page metadata |
+| `social_image` | empty | Optional default Open Graph image |
+| `mermaid` | `false` | Load Mermaid on pages containing diagrams |
+| `mermaid_url` | jsDelivr Mermaid ESM URL | Mermaid module source |
+| `versions_enabled` | `false` | Show the documentation version selector |
+| `versions_path` | `data/versions.json` | Version selector data file |
+| `version_label` | `Documentation version` | Version selector accessible label |
+| `current_version` | empty | ID of the version represented by this build |
+| `version_banner` | empty | Optional plain-text notice shown above every page |
+| `version_preserve_path` | `true` | Use route manifests to preserve paths across versions |
+| `favicon` | empty | Optional static favicon path |
+| `extra_styles` | empty | Additional static stylesheets |
+
+Mermaid is loaded in the browser only when rendered content contains `class="mermaid"`. The theme
+does not require Chromium. Set `mermaid = false` when diagrams are rendered to SVG during another
+build step. Mermaid is disabled by default because its default module URL is a third-party request.
+
+## Page data
+
+The theme reads optional page controls and navigation from front matter:
+
+```toml
+[extra]
+breadcrumbs = [{ title = "Guides", path = "guides/" }]
+previous = { title = "Overview", path = "" }
+next = { title = "Configuration", path = "guides/configuration/" }
+page_navigation = true
+toc = true
+edit_link = true
+metadata = true
+```
+
+Internal navigation entries use paths without a leading slash. The theme resolves them through
+Zola's `get_url`, so the same build works at the domain root and under a base path. A consumer can
+set any per-page boolean to `false`, and `page_navigation`, `breadcrumbs`, and `toc` also have global
+defaults.
+
+Set `[markdown] insert_anchor_links = "right"` in the site configuration to use the theme's
+keyboard-focusable heading permalinks.
+
+## Documentation versions
+
+The theme displays versions but does not decide how releases are named, built, retained, or
+deployed. Enable the selector and provide `data/versions.json`:
+
+```toml
+[extra.zola_docs]
+versions_enabled = true
+current_version = "1.4"
+```
+
+```json
+[
+  { "id": "1.4", "label": "1.4", "url": "https://docs.example.com/1.4/" },
+  { "id": "stable", "label": "Stable", "url": "https://docs.example.com/stable/" }
+]
+```
+
+Each deployed build should set `current_version` to an ID in that file. Exact release URLs can stay
+immutable while entries such as `stable`, `latest`, or `nightly` can point to moving deployments.
+Channels have no built-in meaning. Omit a nightly entry when the project has no nightly docs, or
+leave `versions_enabled = false` for a single unversioned site.
+
+A version entry can provide a `manifest` URL containing a JSON array of published paths. When
+`version_preserve_path` is enabled, the selector keeps the current path if it appears in the target
+manifest and otherwise opens that version's root. A failed manifest request also falls back to the
+version root.
+
+Set `version_banner` on a build that needs a site-wide warning, such as unreleased or unsupported
+documentation. Each versioned build naturally uses its own Zola search index, so search stays within
+the selected documentation set.
+
+Compatibility floors, deprecations, and API availability remain source or consumer data. Generated
+reference templates can render them through the `page_metadata` block without adding handwritten
+version markers to prose.
+
+## Overrides
+
+Site templates can extend a theme template and replace a focused block:
+
+```jinja
+{% extends "zola-docs/templates/page.html" %}
+{% block page_footer %}<p>Site-owned footer</p>{% endblock page_footer %}
+```
+
+The public extension blocks include `head`, `header`, `header_brand`, `sidebar`, `page_header`,
+`page_metadata`, `page_before_content`, `page_after_content`, `page_footer`, `section_header`,
+`section_before_content`, `section_after_content`, `section_footer`, `footer`, and `scripts`.
+
+Content transformations, generated references, release data, navigation generation, and custom
+components belong to the consuming site.
+
+## Validate
+
+Build the included demo and exercise a separate consumer override:
+
+```sh
+uv run python tests/check.py --zola /path/to/zola
+```

@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Theme",
+    "items": [
+      { "title": "Overview", "url": "/" },
+      { "title": "Getting started", "path": "guides/getting-started/" }
+    ]
+  }
+]
