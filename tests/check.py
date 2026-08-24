@@ -43,6 +43,8 @@ def check_demo(zola: Path) -> None:
         'data-navigation-open',
         'aria-controls="mobile-navigation-dialog"',
         'class="sidebar-chevron is-expanded"',
+        'class="sidebar-child-count"',
+        '<span aria-hidden="true">1</span><span class="visually-hidden">1 sub-pages</span>',
         'id="main-content"',
         'style="max-width: 78rem"',
     )
@@ -157,7 +159,7 @@ content_max_width = "none"
             'aria-current="page"><svg class="sidebar-chevron is-expanded"',
             ">Child</a>",
             ">Peer</a>",
-            ">Reference</a>",
+            '>Reference<span class="sidebar-child-count">',
             'href="https://docs.example.test/manual/zola-docs.css?',
             "zola-docs.css",
         )

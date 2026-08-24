@@ -122,7 +122,8 @@ the complete navigation for compatibility.
 
 Parent links use route-driven SVG chevrons. A right-facing chevron leads into a section, while a
 down-facing chevron marks the generated branch whose children are visible. Chevrons are navigation
-state, not client-side toggle controls.
+state, not client-side toggle controls. A muted count on a pruned parent reports how many immediate
+sub-pages are omitted from the current page.
 
 Zola resolves this scope while rendering each static page. Unrelated links never enter that page's
 HTML, so the browser has less markup to download and parse than a complete tree hidden with CSS or
