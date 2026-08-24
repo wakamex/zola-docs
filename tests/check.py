@@ -43,7 +43,7 @@ def check_demo(zola: Path) -> None:
         'data-navigation-open',
         'aria-controls="mobile-navigation-dialog"',
         'id="main-content"',
-        '--docs-content-max-width: 78rem',
+        'style="max-width: 78rem"',
     )
     require(
         guide,
@@ -128,7 +128,7 @@ content_max_width = "none"
         require(
             page,
             "Consumer page",
-            '--docs-content-max-width: none',
+            'style="max-width: none"',
             "data-consumer-metadata",
             "data-consumer-override",
             "Preview documentation",
