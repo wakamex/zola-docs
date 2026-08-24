@@ -61,6 +61,8 @@ def check_demo(zola: Path) -> None:
         'rel="canonical"',
     )
     require(css, "prefers-color-scheme: dark", "@media (max-width: 52rem)", ":focus-visible", ".navigation-dialog", "100dvh")
+    if "max-width: 76ch" in css:
+        raise RuntimeError("Prose width duplicated the configurable content maximum")
     script = (ROOT / "static/zola-docs.js").read_text()
     require(
         script,
