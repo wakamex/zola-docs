@@ -4,7 +4,13 @@
     "title": "Theme",
     "items": [
       { "title": "Overview", "url": "/" },
-      { "title": "Getting started", "path": "guides/getting-started/" }
+      {
+        "title": "Getting started",
+        "path": "guides/getting-started/",
+        "children": [
+          { "title": "Installation", "path": "guides/installation/" }
+        ]
+      }
     ]
   }
 ]

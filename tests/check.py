@@ -42,8 +42,7 @@ def check_demo(zola: Path) -> None:
         'class="theme-icon theme-icon-dark"',
         'data-navigation-open',
         'aria-controls="mobile-navigation-dialog"',
-        '<details class="sidebar-navigation-group" open>',
-        'class="sidebar-chevron"',
+        'class="sidebar-chevron is-expanded"',
         'id="main-content"',
         'style="max-width: 78rem"',
     )
@@ -54,6 +53,7 @@ def check_demo(zola: Path) -> None:
         'class="mermaid"',
         'type="module"',
         'class="breadcrumbs"',
+        ">Installation</a>",
         'aria-label="Page navigation"',
         'class="edit-link"',
         'class="last-updated"',
@@ -66,6 +66,8 @@ def check_demo(zola: Path) -> None:
     require(css, "prefers-color-scheme: dark", "@media (max-width: 52rem)", ":focus-visible", ".navigation-dialog", "100dvh")
     if "max-width: 76ch" in css:
         raise RuntimeError("Prose width duplicated the configurable content maximum")
+    if 'class="sidebar-navigation-group"' in home:
+        raise RuntimeError("Sidebar navigation retained click-to-toggle groups")
     script = (ROOT / "static/zola-docs.js").read_text()
     require(
         script,
@@ -79,6 +81,8 @@ def check_demo(zola: Path) -> None:
         'aria-current="page"',
         "scrollIntoView",
     )
+    if "mobile-navigation-group" in script:
+        raise RuntimeError("Mobile navigation restored client-side group toggles")
     if not all(item.get("title") for item in search):
         raise RuntimeError("Demo search index contains an empty title")
     for directory in (ROOT / "templates", ROOT / "static"):
@@ -150,7 +154,7 @@ content_max_width = "none"
             "Preview documentation",
             'href="https://docs.example.test/manual/page',
             'aria-current="page"',
-            'aria-current="page">Page',
+            'aria-current="page"><svg class="sidebar-chevron is-expanded"',
             ">Child</a>",
             ">Peer</a>",
             ">Reference</a>",

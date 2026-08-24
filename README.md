@@ -120,6 +120,10 @@ children only for the current branch. Set `sidebar_children` to `false` on a nav
 its exhaustive leaves already live on an index page and in search. Pages without these extras keep
 the complete navigation for compatibility.
 
+Parent links use route-driven SVG chevrons. A right-facing chevron leads into a section, while a
+down-facing chevron marks the generated branch whose children are visible. Chevrons are navigation
+state, not client-side toggle controls.
+
 Zola resolves this scope while rendering each static page. Unrelated links never enter that page's
 HTML, so the browser has less markup to download and parse than a complete tree hidden with CSS or
 collapsed by JavaScript. The full navigation data remains available at build time for breadcrumbs,
