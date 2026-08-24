@@ -79,6 +79,7 @@ The theme reads optional page controls and navigation from front matter:
 
 ```toml
 [extra]
+source_path = "docs/guides/getting-started.md"
 breadcrumbs = [{ title = "Guides", path = "guides/" }]
 previous = { title = "Overview", path = "" }
 next = { title = "Configuration", path = "guides/configuration/" }

@@ -57,7 +57,7 @@
     {% block page_after_content %}{% endblock page_after_content %}
     {% set edit_enabled = page.extra.edit_link | default(value=true) %}
     {% if edit_enabled and config.extra.zola_docs.edit_url %}
-    <a class="edit-link" href="{{ config.extra.zola_docs.edit_url }}/{{ config.extra.zola_docs.edit_branch }}/{{ page.relative_path }}">{{ config.extra.zola_docs.edit_label }}</a>
+    <a class="edit-link" href="{{ config.extra.zola_docs.edit_url }}/{{ config.extra.zola_docs.edit_branch }}/{{ page.extra.source_path | default(value=page.relative_path) }}">{{ config.extra.zola_docs.edit_label }}</a>
     {% endif %}
     {% if config.extra.zola_docs.last_updated and page.updated %}
     <p class="last-updated">{{ config.extra.zola_docs.last_updated_label }}: <time datetime="{{ page.updated }}">{{ page.updated }}</time></p>

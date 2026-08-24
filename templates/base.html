@@ -103,7 +103,7 @@
         <nav aria-label="{{ config.extra.zola_docs.navigation_label }}">
           {% for group in navigation %}
           <section>
-            <h2>{{ group.title }}</h2>
+            <h2>{% if group.path is defined %}<a href="{{ get_url(path=group.path) | safe }}">{{ group.title }}</a>{% else %}{{ group.title }}{% endif %}</h2>
             <ul>
               {% for item in group.items %}
               {% if item.path is defined %}{% set item_url = get_url(path=item.path) %}{% set item_current_path = "/" ~ item.path %}{% else %}{% set item_url = item.url %}{% set item_current_path = item.url %}{% endif %}
