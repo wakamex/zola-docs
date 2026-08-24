@@ -38,6 +38,8 @@ def check_demo(zola: Path) -> None:
         'aria-current="page">Stable',
         '>Nightly</a>',
         'data-appearance-toggle',
+        'data-navigation-open',
+        'aria-controls="mobile-navigation-dialog"',
         'id="main-content"',
     )
     require(
@@ -52,7 +54,9 @@ def check_demo(zola: Path) -> None:
         'class="heading-anchor"',
         'rel="canonical"',
     )
-    require(css, "prefers-color-scheme: dark", "@media (max-width: 52rem)", ":focus-visible")
+    require(css, "prefers-color-scheme: dark", "@media (max-width: 52rem)", ":focus-visible", ".navigation-dialog", "100dvh")
+    script = (ROOT / "static/zola-docs.js").read_text()
+    require(script, 'document.createElement("dialog")', "showModal()", 'aria-current="page"', "scrollIntoView")
     if not all(item.get("title") for item in search):
         raise RuntimeError("Demo search index contains an empty title")
     for directory in (ROOT / "templates", ROOT / "static"):
