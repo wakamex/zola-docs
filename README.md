@@ -1,9 +1,9 @@
 # Zola Docs
 
 Zola Docs is a small documentation theme with responsive navigation, breadcrumbs, previous and next
-page links, a page table of contents, local search, persisted auto/light/dark appearance, code-copy
-controls, optional Mermaid rendering, and optional documentation version selection. It has no
-framework or package-manager runtime dependency.
+page links, a page table of contents, local search, system-aware light/dark appearance, code-copy
+controls, optional Mermaid rendering, and optional documentation version selection. It requires
+Zola but has no client-side framework or package-manager runtime dependency.
 
 ## Install
 
