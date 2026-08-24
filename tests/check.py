@@ -42,6 +42,8 @@ def check_demo(zola: Path) -> None:
         'class="theme-icon theme-icon-dark"',
         'data-navigation-open',
         'aria-controls="mobile-navigation-dialog"',
+        '<details class="sidebar-navigation-group" open>',
+        'class="sidebar-chevron"',
         'id="main-content"',
         'style="max-width: 78rem"',
     )
