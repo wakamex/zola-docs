@@ -53,7 +53,9 @@
     button.setAttribute("aria-label", "Copy code");
     button.addEventListener("click", async function () {
       var source = block.querySelector("code") || block;
-      var text = source.textContent.replace(/^\$ /gm, "");
+      var text = source.textContent
+        .replace(/^\s?[$#]\s+/gm, "")
+        .replace(/^\s*\n/gm, "");
       try {
         await navigator.clipboard.writeText(text);
         button.textContent = "Copied";
