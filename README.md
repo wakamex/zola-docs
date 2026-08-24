@@ -125,6 +125,23 @@ HTML, so the browser has less markup to download and parse than a complete tree 
 collapsed by JavaScript. The full navigation data remains available at build time for breadcrumbs,
 previous and next links, validation, and generated reference indexes.
 
+### Measured Wakterm output
+
+Wakterm's 655-document site previously emitted the same 646-link sidebar on every page. With the
+same content and scoped navigation, a guide emits 21 sidebar links and a generated config field
+emits 38:
+
+| Page | Complete HTML | Gzipped HTML | Sidebar HTML | Sidebar links |
+| --- | ---: | ---: | ---: | ---: |
+| Guide, full tree | 164,421 B | 16,528 B | 138,539 B | 646 |
+| Guide, scoped | 30,159 B | 8,712 B | 3,922 B | 21 |
+| Config field, full tree | 143,726 B | 10,106 B | 138,539 B | 646 |
+| Config field, scoped | 12,774 B | 2,444 B | 7,548 B | 38 |
+
+That reduced complete HTML by 82% for the guide and 91% for the config field. The gzipped complete
+pages fell by 47% and 76%. These numbers use Python's default gzip settings over generated HTML,
+not a browser transfer trace.
+
 Backlinks use Zola's native `page.backlinks` and `section.backlinks` data. The theme does not parse
 wikilinks or require them: ordinary internal links and wikilinks both contribute when the Zola build
 records an internal content link. Enable backlink presentation with `backlinks = true` globally or
