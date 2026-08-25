@@ -1,0 +1,47 @@
+[[sites]]
+name = "Rust Book"
+shell_bytes = 4897
+
+[[sites.versions]]
+id = "1.70.0"
+routes = ".work/book-1.70.0.routes"
+
+[[sites.versions]]
+id = "1.90.0"
+routes = ".work/book-1.90.0.routes"
+
+[[sites.versions]]
+id = "1.98.0"
+routes = ".work/book-1.98.0.routes"
+
+[[sites]]
+name = "Cargo Book"
+shell_bytes = 4897
+
+[[sites.versions]]
+id = "1.70.0"
+routes = ".work/cargo-1.70.0.routes"
+
+[[sites.versions]]
+id = "1.90.0"
+routes = ".work/cargo-1.90.0.routes"
+
+[[sites.versions]]
+id = "1.98.0"
+routes = ".work/cargo-1.98.0.routes"
+
+[[sites]]
+name = "Rust Reference"
+shell_bytes = 4897
+
+[[sites.versions]]
+id = "1.70.0"
+routes = ".work/reference-1.70.0.routes"
+
+[[sites.versions]]
+id = "1.90.0"
+routes = ".work/reference-1.90.0.routes"
+
+[[sites.versions]]
+id = "1.98.0"
+routes = ".work/reference-1.98.0.routes"

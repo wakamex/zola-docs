@@ -1,0 +1,22 @@
+schema = 1
+id = "rust-book"
+repository = "https://github.com/rust-lang/book.git"
+revision = "917544888a55e4da7109bdba8c88c893c0da70f4"
+adapter = "mdbook"
+expected_native_only_routes = ["/print/", "/toc/"]
+
+[[generators]]
+id = "mdbook"
+cwd = "{source}"
+command = ["{mdbook}", "build", "--dest-dir", "{output}"]
+output = "{work}/outputs/mdbook"
+version_command = ["{mdbook}", "--version"]
+expected_version = "mdbook v0.5.1"
+
+[[generators]]
+id = "zola-docs"
+cwd = "{converted}"
+command = ["{zola}", "build", "--output-dir", "{output}"]
+output = "{work}/outputs/zola-docs"
+version_command = ["{zola}", "--version"]
+expected_version = "zola 0.23.3"

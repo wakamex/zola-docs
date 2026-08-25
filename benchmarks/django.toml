@@ -1,0 +1,43 @@
+[[sites]]
+name = "Django documentation"
+shell_bytes = 4897
+
+[[sites.versions]]
+id = "2.2"
+routes = ".work/django-2.2.routes"
+
+[[sites.versions]]
+id = "3.0"
+routes = ".work/django-3.0.routes"
+
+[[sites.versions]]
+id = "3.1"
+routes = ".work/django-3.1.routes"
+
+[[sites.versions]]
+id = "3.2"
+routes = ".work/django-3.2.routes"
+
+[[sites.versions]]
+id = "4.0"
+routes = ".work/django-4.0.routes"
+
+[[sites.versions]]
+id = "4.1"
+routes = ".work/django-4.1.routes"
+
+[[sites.versions]]
+id = "4.2"
+routes = ".work/django-4.2.routes"
+
+[[sites.versions]]
+id = "5.0"
+routes = ".work/django-5.0.routes"
+
+[[sites.versions]]
+id = "5.1"
+routes = ".work/django-5.1.routes"
+
+[[sites.versions]]
+id = "5.2"
+routes = ".work/django-5.2.routes"
