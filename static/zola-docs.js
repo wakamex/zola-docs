@@ -103,25 +103,7 @@
     updateNavigation();
   }
 
-  document.querySelectorAll("[data-version-manifest]").forEach(function (link) {
-    link.addEventListener("click", async function (event) {
-      event.preventDefault();
-      var root = link.dataset.versionRoot;
-      try {
-        var response = await fetch(link.dataset.versionManifest);
-        if (!response.ok) throw new Error("Version route manifest request failed");
-        var routes = await response.json();
-        var current = link.dataset.currentPath;
-        if (routes.includes(current)) {
-          location.href = root.replace(/\/$/, "") + current;
-          return;
-        }
-      } catch (_error) {}
-      location.href = root;
-    });
-  });
-
-  document.querySelectorAll("pre:not(.mermaid)").forEach(function (block) {
+  if (document.body.hasAttribute("data-copy-code")) document.querySelectorAll("pre:not(.mermaid)").forEach(function (block) {
     var button = document.createElement("button");
     button.className = "copy-button";
     button.type = "button";

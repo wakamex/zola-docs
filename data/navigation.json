@@ -1,16 +1,18 @@
-[
-  {
-    "id": "theme",
-    "title": "Theme",
-    "items": [
-      { "title": "Overview", "url": "/" },
-      {
-        "title": "Getting started",
-        "path": "guides/getting-started/",
-        "children": [
-          { "title": "Installation", "path": "guides/installation/" }
-        ]
-      }
-    ]
-  }
-]
+{
+  "groups": [
+    {
+      "id": "theme",
+      "title": "Theme",
+      "items": [
+        { "title": "Overview", "path": "" },
+        {
+          "title": "Getting started",
+          "path": "guides/getting-started/",
+          "children": [
+            { "title": "Installation", "path": "guides/installation/" }
+          ]
+        }
+      ]
+    }
+  ]
+}

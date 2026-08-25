@@ -17,7 +17,7 @@ include_path = true
 
 [extra.zola_docs]
 site_name = "Zola Docs"
-home_url = "/"
+home_url = ""
 navigation_path = "data/navigation.json"
 navigation_label = "Documentation"
 search_enabled = true

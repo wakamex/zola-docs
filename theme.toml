@@ -2,13 +2,13 @@ name = "zola-docs"
 description = "A small, responsive documentation theme for Zola"
 tags = ["documentation", "search", "responsive", "accessible"]
 license = "MIT"
-homepage = ""
+homepage = "https://github.com/wakamex/zola-docs"
 min_version = "0.23.0"
-demo = ""
+demo = "https://wakterm.org/"
 
 [extra.zola_docs]
 site_name = "Documentation"
-home_url = "/"
+home_url = ""
 navigation_path = "data/navigation.json"
 navigation_label = "Documentation"
 search_enabled = true
@@ -47,4 +47,4 @@ extra_styles = []
 
 [author]
 name = "Zola Docs theme contributors"
-homepage = ""
+homepage = "https://github.com/wakamex/zola-docs"

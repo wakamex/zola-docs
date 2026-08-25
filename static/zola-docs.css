@@ -144,3 +144,27 @@ body:has(.navigation-dialog[open]) { overflow: hidden; }
   .page-navigation a { display: block; }
   .page-navigation .next { margin-top: 0.7rem; text-align: left; }
 }
+
+@media print {
+  @page { margin: 1.5cm; }
+  :root,
+  :root[data-theme] { color-scheme: light; --docs-bg: #fff; --docs-surface: #f5f5f5; --docs-text: #111; --docs-muted: #444; --docs-link: #111; --docs-border: #bbb; }
+  .site-header,
+  .sidebar,
+  .navigation-dialog,
+  .skip-link,
+  .copy-button,
+  .edit-link,
+  .page-navigation,
+  .heading-anchor { display: none !important; }
+  .shell { display: block; min-height: 0; }
+  .content { width: auto; max-width: none !important; padding: 0; }
+  .toc { float: none; width: auto; margin: 1rem 0; break-inside: avoid; }
+  .prose pre,
+  .prose table,
+  .admonition,
+  .version-banner { break-inside: avoid; }
+  .prose pre { overflow: visible; white-space: pre-wrap; }
+  .prose table { display: table; overflow: visible; }
+  a { color: inherit; text-decoration: underline; }
+}

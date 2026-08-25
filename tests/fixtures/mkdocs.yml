@@ -1,0 +1,8 @@
+site_name: Example Manual
+nav:
+  - Home: index.md
+  - Guide:
+      - Install: guide/install.md
+      - Concepts:
+          - Model: guide/concepts/model.md
+  - Project: https://example.com/project/
