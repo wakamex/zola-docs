@@ -23,7 +23,12 @@
   }
 }
 
+/* A chosen theme also sets the browser's own controls, such as inputs and scrollbars, which
+   otherwise follow the operating system's setting. */
+:root[data-theme="light"] { color-scheme: light; }
+
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --docs-bg: #111014;
   --docs-surface: #1c1921;
   --docs-text: #ece8f0;
