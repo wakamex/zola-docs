@@ -341,9 +341,12 @@ Site templates can extend a theme template and replace a focused block:
 {% block page_footer %}<p>Site-owned footer</p>{% endblock page_footer %}
 ```
 
-The public extension blocks include `head`, `header`, `header_brand`, `sidebar`, `page_header`,
-`page_metadata`, `page_before_content`, `page_after_content`, `page_footer`, `section_header`,
-`section_before_content`, `section_after_content`, `section_footer`, `footer`, and `scripts`.
+The public extension blocks include `head`, `header`, `header_brand`, `sidebar`,
+`sidebar_before_navigation`, `page_header`, `page_metadata`, `page_before_content`,
+`page_after_content`, `page_footer`, `section_header`, `section_before_content`,
+`section_after_content`, `section_footer`, `footer`, and `scripts`. `sidebar_before_navigation`
+renders above the navigation groups, is never collapsed with them, and moves into the menu
+dialog on narrow screens, which suits a few site-wide links.
 
 Content transformations, generated references, release data, navigation generation, and custom
 components belong to the consuming site.
